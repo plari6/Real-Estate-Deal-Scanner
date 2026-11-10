@@ -1,0 +1,63 @@
+{
+  "defaults": {
+    "dealType": "sale"
+  },
+  "sources": [
+    {
+      "name": "rightmove-london",
+      "url": "https://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=REGION%5E87490&sortType=6&index={offset}",
+      "pageSize": 24,
+      "pages": 5,
+      "defaults": { "city": "London", "currency": "GBP", "areaUnit": "sqft" }
+    },
+    {
+      "name": "daft-dublin",
+      "url": "https://www.daft.ie/property-for-sale/dublin-city?page={page}",
+      "pages": 5,
+      "defaults": { "city": "Dublin", "currency": "EUR" }
+    },
+    {
+      "name": "avito-casablanca",
+      "note": "Avito answers plain HTTP with 403; the scanner switches to Puppeteer Stealth automatically.",
+      "url": "https://www.avito.ma/fr/casablanca/appartements-%C3%A0_vendre?o={page}",
+      "pages": 5,
+      "defaults": { "city": "Casablanca", "currency": "MAD", "type": "apartment" }
+    },
+    {
+      "name": "mubawab-casablanca",
+      "note": "Mubawab's robots.txt allows the first results page only (no :p:2 pagination). The heuristic card finder reads it with no selectors.",
+      "url": "https://www.mubawab.ma/fr/st/casablanca/appartements-a-vendre",
+      "pages": 1,
+      "defaults": { "city": "Casablanca", "currency": "MAD", "type": "apartment" }
+    },
+    {
+      "name": "my-portal-css-example",
+      "enabled": false,
+      "url": "https://portal.example.com/search?city=berlin&type=apartment&page={page}",
+      "pages": 3,
+      "engine": "browser",
+      "scrolls": 2,
+      "selectors": {
+        "card": "article.listing",
+        "title": "h2",
+        "price": ".price",
+        "area": ".facts li:nth-child(1)",
+        "rooms": ".facts li:nth-child(2)",
+        "location": ".address",
+        "link": "a.listing-link@href",
+        "image": "img@data-src || img@src"
+      },
+      "defaults": { "city": "Berlin", "currency": "EUR", "type": "apartment" }
+    },
+    {
+      "name": "my-portal-json-example",
+      "enabled": false,
+      "url": "https://portal.example.com/buy/dubai?page={page}",
+      "pages": 3,
+      "adapter": "embedded",
+      "fieldMap": { "list": "props.pageProps.searchResult.listings", "price": "price.value", "area": "size.value", "url": "share_url" },
+      "urlTemplate": "https://portal.example.com/property/{id}",
+      "defaults": { "city": "Dubai", "currency": "AED", "areaUnit": "sqft", "type": "apartment" }
+    }
+  ]
+}

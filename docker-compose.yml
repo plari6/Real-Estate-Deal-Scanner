@@ -1,0 +1,15 @@
+services:
+  deal-scanner:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/app/data        # deals.db + sources.json live here
+    ports:
+      - "8080:8080"             # /health
+    shm_size: "512mb"           # Chrome needs more shared memory than Docker's 64 MB default
+
+# First run:      cp examples/sources.example.json data/sources.json   (edit it)
+# Test a source:  docker compose run --rm deal-scanner test-source rightmove-london
+# One scan:       docker compose run --rm deal-scanner scan
+# Report:         docker compose run --rm deal-scanner report --out data/deals-report

@@ -1,0 +1,43 @@
+{
+  "name": "real-estate-deal-scanner",
+  "version": "1.0.0",
+  "description": "Scrapes real estate portals with Puppeteer, finds properties priced 20%+ below the local market average per m² and alerts you on Telegram.",
+  "type": "module",
+  "bin": {
+    "deal-scanner": "bin/deal-scanner.js"
+  },
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node bin/deal-scanner.js start",
+    "scan": "node bin/deal-scanner.js scan",
+    "demo": "node bin/deal-scanner.js demo",
+    "doctor": "node bin/deal-scanner.js doctor",
+    "test": "node --test --test-concurrency=1 \"test/**/*.test.js\""
+  },
+  "keywords": [
+    "real-estate",
+    "property",
+    "deal-finder",
+    "puppeteer",
+    "scraper",
+    "telegram-bot",
+    "undervalued",
+    "investment"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "dotenv": "^18.0.10",
+    "exceljs": "^4.4.0",
+    "node-cron": "^4.6.0",
+    "puppeteer": "^25.17.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "allowScripts": {
+    "puppeteer@25.17.0": true
+  }
+}
